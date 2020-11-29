@@ -1,6 +1,11 @@
 import re
 
 
+jamos = list('ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ')
+jamos.extend('ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣㆅㆉㆊㆌㆍㆎ')
+jamos.extend('ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ')
+
+
 def read_lines(file_path):
     lines = []
     with open(file_path, 'r') as inf:
@@ -24,6 +29,8 @@ for d in dicts:
         r_raw = r"'raw': (.+)}"
         word = re.search(r_word, d_line)[1]
         raw = re.search(r_raw, d_line)[1]
+        if word[0] in jamos:
+            continue
         if '［명사］' in raw:
             nouns.add(word)
 
